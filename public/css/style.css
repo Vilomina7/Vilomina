@@ -1,0 +1,41 @@
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-registration input {
+  border-radius: 0;
+  margin-bottom: -1px;
+}
+
+/* Aturan CSS untuk layar desktop */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Aturan CSS untuk layar tablet */
+@media screen and (max-width: 992px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+/* Aturan CSS untuk layar ponsel */
+@media screen and (max-width: 576px) {
+  .container {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}
