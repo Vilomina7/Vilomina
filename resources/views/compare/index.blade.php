@@ -27,20 +27,24 @@
                 <span class="text-secondary" style="font-size:11px">{{ $post1->author->followers->count() }} Follower </span>
             </div>
             <div class="col-lg-auto pt-2 pb-2">
-                @if (Auth::check() && Auth::user()->following->contains($post1->author->id))
-                    <form action="{{ route('follower.unfollow') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ $post1->author->id }}">
-                        <input type="hidden" name="follower_id" value="{{ Auth::user()->id }}">
-                        <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
-                    </form>
+                 @if(Auth::check())
+                    @if (Auth::check() && Auth::user()->following->contains($post1->author->id))
+                        <form action="{{ route('follower.unfollow') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ $post1->author->id }}">
+                            <input type="hidden" name="follower_id" value="{{ Auth::user()->id ?? "N/A" }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
+                        </form>
+                    @else
+                        <form action="{{ route('follower.follow') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ $post1->author->id }}">
+                            <input type="hidden" name="follower_id" value="{{ Auth::user()->id ?? "N/A" }}">
+                            <button type="submit" class="btn btn-success btn-sm">Follow</button>
+                        </form>
+                    @endif
                 @else
-                    <form action="{{ route('follower.follow') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ $post1->author->id }}">
-                        <input type="hidden" name="follower_id" value="{{ Auth::user()->id }}">
-                        <button type="submit" class="btn btn-success btn-sm">Follow</button>
-                    </form>
+                    <a href="/login" class="btn btn-success btn-sm">Follow</a>
                 @endif
             </div>
         </div>
@@ -50,15 +54,19 @@
                 <a href="/bandingkan" class="btn btn-outline-success btn-sm">Bandingkan</a>
             </div>
             <div class="col">
-                @if($post1->bookmarkedByUser(Auth::id()))
-                    <button type="button" class="btn btn-primary btn-sm" disabled>Bookmark</button>
+                @if(Auth::check())
+                    @if($post1->bookmarkedByUser(Auth::id()))
+                        <button type="button" class="btn btn-primary btn-sm" disabled>Bookmark</button>
+                    @else
+                        <form action="{{ route('products.bookmark', $post1) }}" method="GET">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id ?? "N/A" }}">
+                            <input type="hidden" name="post_id" value="{{ $post1->id }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Bookmark</button>
+                        </form>
+                    @endif 
                 @else
-                    <form action="{{ route('products.bookmark', $post1) }}" method="GET">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="post_id" value="{{ $post1->id }}">
-                        <button type="submit" class="btn btn-primary btn-sm">Bookmark</button>
-                    </form>
+                    <a href="/login" class="btn btn-primary btn-sm">Bookmark</a>
                 @endif
             </div>
         </div>
@@ -104,20 +112,24 @@
                 <span class="text-secondary" style="font-size:11px">{{ $post2->author->followers->count() }} Follower </span>
             </div>
             <div class="col-lg-auto pt-2 pb-2">
-                @if (Auth::check() && Auth::user()->following->contains($post2->author->id))
-                    <form action="{{ route('follower.unfollow') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ $post2->author->id }}">
-                        <input type="hidden" name="follower_id" value="{{ Auth::user()->id }}">
-                        <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
-                    </form>
+                @if(Auth::check())
+                    @if (Auth::check() && Auth::user()->following->contains($post2->author->id))
+                        <form action="{{ route('follower.unfollow') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ $post2->author->id }}">
+                            <input type="hidden" name="follower_id" value="{{ Auth::user()->id ?? "N/A" }}">
+                            <button type="submit" class="btn btn-danger btn-sm">Unfollow</button>
+                        </form>
+                    @else
+                        <form action="{{ route('follower.follow') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ $post2->author->id }}">
+                            <input type="hidden" name="follower_id" value="{{ Auth::user()->id ?? "N/A" }}">
+                            <button type="submit" class="btn btn-success btn-sm">Follow</button>
+                        </form>
+                    @endif
                 @else
-                    <form action="{{ route('follower.follow') }}" method="POST">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ $post2->author->id }}">
-                        <input type="hidden" name="follower_id" value="{{ Auth::user()->id }}">
-                        <button type="submit" class="btn btn-success btn-sm">Follow</button>
-                    </form>
+                    <a href="/login" class="btn btn-success btn-sm">Follow</a>
                 @endif
             </div>
         </div>
@@ -127,15 +139,19 @@
                 <a href="/bandingkan" class="btn btn-outline-success btn-sm">Bandingkan</a>
             </div>
             <div class="col">
-                @if($post2->bookmarkedByUser(Auth::id()))
-                    <button type="button" class="btn btn-primary btn-sm" disabled>Bookmark</button>
+                @if(Auth::check())
+                    @if($post2->bookmarkedByUser(Auth::id()))
+                        <button type="button" class="btn btn-primary btn-sm" disabled>Bookmark</button>
+                    @else
+                        <form action="{{ route('products.bookmark', $post2) }}" method="GET">
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ Auth::user()->id ?? "N/A" }}">
+                            <input type="hidden" name="post_id" value="{{ $post2->id }}">
+                            <button type="submit" class="btn btn-primary btn-sm">Bookmark</button>
+                        </form>
+                    @endif
                 @else
-                    <form action="{{ route('products.bookmark', $post2) }}" method="GET">
-                        @csrf
-                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                        <input type="hidden" name="post_id" value="{{ $post2->id }}">
-                        <button type="submit" class="btn btn-primary btn-sm">Bookmark</button>
-                    </form>
+                    <a href="/login" class="btn btn-primary btn-sm">Bookmark</a>
                 @endif
             </div>
         </div>
