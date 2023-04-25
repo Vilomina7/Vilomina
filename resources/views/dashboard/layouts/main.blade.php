@@ -30,6 +30,10 @@
     <link href="/assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="/assets/css/dashboard.widgets.css" rel="stylesheet" type="text/css" media="screen" />
     <link class="main-stylesheet" href="/pages/css/themes/modern.css" rel="stylesheet" type="text/css" />
+    
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
   </head>
   <body class="fixed-header horizontal-menu horizontal-app-menu dashboard">
     @include('dashboard.layouts.header')
@@ -258,5 +262,10 @@
     <script src="/assets/js/dashboard.js" type="text/javascript"></script>
     <script src="/assets/js/scripts.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS -->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
+
   </body>
 </html>
