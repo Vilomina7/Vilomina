@@ -102,13 +102,7 @@
           <!-- BEGIN Overlay Controls !-->
           <input id="overlay-search" class="no-border overlay-search bg-transparent" placeholder="Search..." autocomplete="off" spellcheck="false">
           <br>
-          {{-- <div class="d-flex align-items-center">
-            <div class="form-check right m-b-0">
-              <input id="checkboxn" type="checkbox" value="1">
-              <label for="checkboxn">Search within page</label>
-            </div>
-            <p class="fs-13 hint-text m-l-10 m-b-0">Press enter to search</p>
-          </div> --}}
+
           <!-- END Overlay Controls !-->
         </div>
         <!-- BEGIN Overlay Search Results, This part is for demo purpose, you can add anything you like !-->
