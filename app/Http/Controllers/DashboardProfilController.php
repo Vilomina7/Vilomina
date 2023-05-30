@@ -16,13 +16,7 @@ class DashboardProfilController extends Controller
     }
 
     public function update(Request $request){
-        // $validatedData = $request->validate([
-        //     'name' => 'required|max:255',
-        //     'tanggal_lahir' => 'required',
-        //     'email' => 'required'
-        // ]);
-
-        //dd(User::find($request->user()->id));
+       
         if(!User::find($request->user()->id)
         ->update(['name' => $request->name,
         'email' => $request->email,
@@ -32,135 +26,9 @@ class DashboardProfilController extends Controller
             return back()->with('alert', 'gagal');
         }
 
-        // auth()->user()->update([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'tanggal_lahir' => $request->tanggal_lahir
-        // ]);
-        //$validatedData['id'] = auth()->user()->id;
-        //$validatedData['id'] = $request->user()->id;
-        //auth()->user()->update($rules);
-        //User::where('id')->update($rules);
-        //dd($validatedData);
-        //User::where('id', $user->id)->update($validatedData);
-        
-        // if(!User::updated($validatedData)){
-        //     return back()->with('alert', 'gagal');
-        // }
-        // $validatedData = $request->validate($rules);
-        // User::where('id', $user->id)->update($validatedData);
         return back()->with('success', 'Updated Successfully!');
     }
 
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function index(Request $request, User $user)
-    // {
-    //     return view('dashboard.profil.index', [
-    //         'user' => User::where('id', auth()->user()->id)->get()
-    //     ]);
-
-    //     $rules = [
-    //         'name' => 'required|max:255',
-    //         'email' => 'required'
-    //     ];
-
-    //     if($request->id != $user->id){
-    //         $rules['id'] = 'required|unique:users';
-    //     }
-
-    //     $validatedData = $request->validate($rules);
-
-    //     $validatedData['user_id'] = auth()->user()->id;
-        
-    //     User::where('id', $user->id)->update($validatedData);
-
-    //     //dd($validatedData);
-    //     return redirect('/dashboard/profil')->with('success', 'Updated Successfully!');
-    // }
-
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  \App\Models\User  $user
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show(User $user)
-    // {
-    //     //
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  \App\Models\User  $user
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit(User $user)
-    // {
-    //     return view('dashboard.profil.edit', [
-    //         'user' => User::where('id', auth()->user()->id)->get()
-    //     ]);
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Models\User  $user
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, User $user)
-    // {
-    //     $rules = [
-    //         'name' => 'required|max:255',
-    //         'email' => 'required'
-    //     ];
-
-    //     if($request->id != $user->id){
-    //         $rules['id'] = 'required|unique:user';
-    //     }
-
-    //     $validatedData = $request->validate($rules);
-
-    //     $validatedData['user_id'] = auth()->user()->id;
-        
-    //     User::where('id', $user->id)->update($validatedData);
-
-    //     //dd($validatedData);
-    //     return redirect('/dashboard/profil')->with('success', 'Updated Successfully!');
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  \App\Models\User  $user
-    //  * @return \Illuminate\Http\Response
-    //  */
     public function destroy(Request $request)
     {
         User::destroy($request->user()->id);

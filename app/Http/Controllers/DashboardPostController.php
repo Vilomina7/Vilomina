@@ -6,6 +6,8 @@ use App\Models\Keyword;
 use App\Models\Link;
 use App\Models\Post;
 use App\Models\Promo;
+use App\Models\User;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 
@@ -55,27 +57,10 @@ class DashboardPostController extends Controller
             // 'keyword_id' => 'required',
             // 'link_id' => 'required'
             'image' => 'image|file|max:5000'
-            // 'decoration',
-            // 'original_price',
-            // 'promo_price',
-            // 'satuan_promo',
-            // 'nilai_promo',
-            // 'new_at',
-            // 'expired_at',
-            // 'lokasi',
-            // 'syarat_ketentuan'
-            // 'published_at'
         ]);
 
-        // if($request->file('image')) {
-        //     $validatedData['image'] = $request->file('image')->store('post-images');
-        // }
-        //$validatedData['user_id'] = $request->user()->id;
-        // dd($validatedData);
-        // if(!Post::create($validatedData)){
-        //     return back()->with('alert', 'gagal');
-        // } 
-        if(!Post::create([
+        // $post = Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'user_id' => $request->user()->id,
             'promo_id' => $request->promo_id,
@@ -100,10 +85,23 @@ class DashboardPostController extends Controller
             'key_three' => $request->key_three,
             'key_four' => $request->key_four,
             'key_five' => $request->key_five
-        ])){
+        ]);
+        if(!$post){
             return back()->with('alert', 'gagal');
-        } 
+        }; 
         
+    // Dapatkan semua pengguna yang perlu diberi notifikasi
+    $users = User::all();
+    $postId = $post->id;
+    // Iterasi setiap pengguna dan buat notifikasi baru untuk masing-masing pengguna
+    foreach ($users as $user) {
+        $notification = new Notification();
+        $notification->user_id = $user->id;
+        $notification->post_id = $postId;
+        $notification->message = 'Posting produk baru telah dibuat: ' . $request->title;
+        $notification->save();
+    }
+
         return redirect('/dashboard/posts')->with('success', 'New Post Has Been Added!');
     }
 

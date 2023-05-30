@@ -37,12 +37,12 @@
           <td>{{ $post->title }}</td>
           <td>{{ $post->promo->jenis }}</td>
           <td>
-            <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-info">Detail</a>
-            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning">Update</a>
+            <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-sm btn-info">Detail</a>
+            <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-sm btn-warning">Update</a>
             <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="d-inline">
              @method('delete')
              @csrf
-             <button class="btn btn-danger border-0" onclick="return confirm('Are you sure?')">
+             <button class="btn btn-sm btn-danger border-0" onclick="return confirm('Are you sure?')">
               Delete
              </button>
             </form>

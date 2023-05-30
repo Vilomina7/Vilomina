@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Models\Notification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -48,22 +48,6 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
-    // public function page(){
-    //     return $this->hasOne(HalamanStore::class);
-    // }
-
-    //versi 1
-    // public function followers()
-    // {
-    //     return $this->belongsToMany(User::class, 'followers', 'user_id', 'follower_id');
-    // }
-
-    // public function following()
-    // {
-    //     return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
-    // }
-
-    //versi 2
     public function following()
     {
         return $this->belongsToMany(User::class, 'followers', 'follower_id', 'user_id');
@@ -78,5 +62,10 @@ class User extends Authenticatable
     public function bookmarkedProducts()
     {
         return $this->belongsToMany(Post::class, 'bookmarks')->withTimestamps();
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }

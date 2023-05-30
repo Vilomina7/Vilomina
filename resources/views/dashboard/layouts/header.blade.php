@@ -52,8 +52,13 @@
                 <a href="{{ route('users.index') }}" class="text-decoration-none">Following</a>
             </li>
             <li>
-                <a href="/dashboard/notification" class="text-decoration-none">Notification</a>
-            </li>
+              <a href="{{ route('notifications.index') }}" class="text-decoration-none">Notification</a>
+              @if (auth()->check())
+                  <span class="badge">{{ auth()->user()->notifications->count() }}</span>
+              @endif
+          </li>
+          
+          
           </ul>
           <a href="#" class="search-link d-flex justify-content-between align-items-center d-lg-none" data-toggle="search">Tap here to search <i class="pg-search float-right"></i></a>
         </div>

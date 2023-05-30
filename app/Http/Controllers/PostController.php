@@ -51,42 +51,6 @@ class PostController extends Controller
         ]);
     }
 
-    // public function filter(Request $request){
-        
-    //     $title = '';
-    //     // if(request('promo')){
-    //     //     $promo = Promo::Where('slug', request('promo'));
-    //     //     $title = ' in ' . $promo->jenis;
-    //     // }
-
-    //     if( $request->promo_id){
-    //         $result = Promo::where('slug', 'LIKE', "%" . $request->promo_id . "%");
-    //     }
-    //     if( $request->key){
-    //         $result= POST::where('key_one', 'LIKE', "%" . $request->key . "%");
-    //     }
-    //     if( $request->promo_id && $request->key ){
-    //         $result = POST::where('promo_id', '>=', $request->promo_id)
-    //                      ->where('key_one', '<=', $request->key);
-    //     }
-    //     // $data = $data->paginate(10);
-    //     // return view('search', compact('data'));
-
-    //     // if(request('author')){
-    //     //     $author = User::firstWhere('id', request('author'));
-    //     //     $title = ' in ' . $author->name;
-    //     // }
-
-    //     return view('offer', [
-    //         "title" => "All Posts" . $title,
-    //         "active" => "Offer",
-    //         "promos" => Promo::all(),
-    //         "post" => Post::latest()->search(request(['filter', 'promo', 'post']))
-    //                ->paginate(6)->withQueryString()
-    //         // "post" => $posts->get()
-    //     ]);
-    // }
-
     public function show(Post $post){
         return view('detail', [
             "title" => "Detail Post",

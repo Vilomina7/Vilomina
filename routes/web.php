@@ -2,7 +2,7 @@
 
 // use App\Models\Post;
 // use App\Models\User;
-
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\BookmarkController;
 use App\Models\Promo;
 use Illuminate\Support\Facades\Route;
@@ -96,21 +96,6 @@ Route::get('/bandingkan', function(){
     ]);
 });
 
-// Route::get('/promos/{promo:slug}', function(Promo $promo) {
-//     return view('offer', [
-//         'title' => "Post By Promo : $promo->jenis",
-//         'post' => $promo->posts->load('promo', 'author')
-//     ]);
-// });
-
-// Route::get('/authors/{author:id}', function(User $author) {
-//     return view('offer', [
-//         'title' => "Post By Author : $author->name",
-//         'active' => 'offer',
-//         'post' => $author->posts->load('promo', 'author')
-//     ]);
-// });
-
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
@@ -118,23 +103,16 @@ Route::post('/logout', [LoginController::class, 'logout']);
 Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-
 Route::get('/dashboard', function(){
     return view('dashboard.index');
 })->middleware('auth');
 
 Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug'])->middleware('auth');
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
-// Route::resource('/dashboard/profil', DashboardProfilController::class)->middleware('auth');
-
-// Route::get('/dashboard/profil', [DashboardProfilController::class, 'index']);
 
 Route::get('edit', [DashboardProfilController::class, 'edit'])->name('profil.edit');
 Route::put('update', [DashboardProfilController::class, 'update'])->name('profil.update');
 Route::get('delete', [DashboardProfilController::class, 'destroy'])->name('profil.destroy');
-// Route::get('edit', [DashboardPasswordController::class, 'edit'])->name('password.edit');
-// Route::put('update', [DashboardPasswordController::class, 'update'])->name('password.update');
 
 Route::get('/dashboard/infohalaman', [DashboardHalamanController::class, 'edit'])->middleware('auth')->name('hal.edit');
 Route::put('/dashboard/infohalaman', [DashboardHalamanController::class, 'update'])->middleware('auth')->name('hal.update');
@@ -145,8 +123,6 @@ Route::patch('/dashboard/password', [DashboardProfilController::class, 'passupda
 Route::get('/bookmark', [BookmarkController::class, 'bookmark'])->name('products.bookmark');
 Route::post('/unbookmark', [BookmarkController::class, 'unbookmark'])->name('products.unbookmark');
 Route::get('/dashboard/bookmark', [BookmarkController::class, 'index'])->name('products.bookmarked');
-// Route::get('/dashboard/bookmark', [DashboardPostController::class, 'bookmark'])->middleware('auth');
-// Route::post('add-to-bookmark', [BookmarkController::class, 'add']);
 
 // Bandingkan
 
@@ -168,3 +144,7 @@ Route::post('/unfollow', [FollowerController::class, 'unfollow'])->name('followe
 // Route::get('/bookmark/create', [BookmarkController::class, 'create'])->name('bookmarks.create');
 // Route::post('/bookmark', [BookmarkController::class, 'store'])->name('bookmarks.store');
 // Route::delete('/bookmark/{bookmark}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
+
+Route::get('/dashboard/notification', [NotificationController::class, 'index'])->name('notifications.index');
+
+Route::delete('/notification/{notification}', [NotificationController::class, 'destroy'])->name('notification.destroy');

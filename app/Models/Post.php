@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
-
+use App\Models\Notification;
 
 class Post extends Model
 {
@@ -38,25 +38,16 @@ class Post extends Model
                 $query->where('id', $author)
             )
         );
-
-        // $query->when($searchs['key_one'] ?? false, fn($query, $key_one) =>
-        //     $query->whereHas('key_one', fn($query) =>
-        //         $query->where('id', $key_one)
-        //     )
-        // );
     }
 
     public function promo() {
         return $this->belongsTo(Promo::class);
     }
 
-    // public function link() {
-    //     return $this->belongsTo(Link::class);
-    // }
-
-    // public function keyword(){
-    //     return $this->belongsTo(Keyword::class);
-    // }
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
 
     public function bookmarks()
     {
